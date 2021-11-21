@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useRef, useState } from "react";
 import "./App.css";
+import ImpertativeComp from "./component/ImperativeComp";
 import reducer from "./reducer";
 function App() {
   // const [counter, setCounter] = useState(0);
@@ -10,6 +11,7 @@ function App() {
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   const inputRef = useRef(null);
+  const imperativeRef = useRef(null);
   const handleCounter = () => {
     // setCounter(prevCounter => {
     //   return prevCounter + 1;
@@ -22,6 +24,7 @@ function App() {
 
   useEffect(() => {
     inputRef.current.focus();
+    imperativeRef.current.changeText();
     console.log(inputRef);
   }, []);
 
@@ -52,6 +55,15 @@ function App() {
           <input type="email" className="form-control" id="inputE" />
         </form>
       </div>
+
+      {/*HACK: forwarding ref to child element and implementig useImperative handle hook */}
+      <ImpertativeComp ref={imperativeRef} />
+      <button
+        className="btn btn-outline-dark"
+        onClick={() => imperativeRef.current.changeImpState()}
+      >
+        change hello
+      </button>
     </div>
   );
 }
