@@ -1,9 +1,11 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useContext, useState } from "react";
 import { useImperativeHandle, useRef } from "react/cjs/react.development";
+import { Context } from "../context/Context";
 
 const ImpertativeComp = (props, ref) => {
   console.log(ref);
   const childRef = useRef(null);
+  const { userName } = useContext(Context);
   const [text, setText] = useState("hellow");
   useImperativeHandle(ref, () => ({
     changeText() {
@@ -22,7 +24,9 @@ const ImpertativeComp = (props, ref) => {
         text will change after 3s and it is controlling from app to imperative
         handle
       </p>
-      <p className="text-danger">{text}</p>
+      <p className="text-danger">
+        {text} {userName}
+      </p>
     </div>
   );
 };

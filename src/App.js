@@ -1,10 +1,11 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useContext, useEffect, useReducer, useRef, useState } from "react";
 import "./App.css";
 import ImpertativeComp from "./component/ImperativeComp";
+import { Context } from "./context/Context";
 import reducer from "./reducer";
 function App() {
   // const [counter, setCounter] = useState(0);
-
+  const { helloText, userName } = useContext(Context);
   const initialState = {
     count: 2,
     square: 0,
@@ -64,6 +65,10 @@ function App() {
       >
         change hello
       </button>
+      {/* FIXME:Accesing context data here */}
+      <div className="bg-warning">
+        {helloText} {userName}
+      </div>
     </div>
   );
 }
