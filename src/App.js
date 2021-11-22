@@ -67,7 +67,7 @@ function App() {
       </button>
       {/* FIXME:Accesing context data here */}
       <div className="bg-warning">
-        {helloText} {userName}
+        {helloText} {userName} islam
       </div>
     </div>
   );
