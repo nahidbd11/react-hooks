@@ -1,8 +1,16 @@
-import { useContext, useEffect, useReducer, useRef, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+  useMemo,
+} from "react";
 import "./App.css";
 import ImpertativeComp from "./component/ImperativeComp";
 import { Context } from "./context/Context";
 import reducer from "./reducer";
+
 function App() {
   // const [counter, setCounter] = useState(0);
   const { helloText, userName } = useContext(Context);
@@ -22,7 +30,11 @@ function App() {
   };
 
   const { count, square } = state;
-
+  function cubicNum(count) {
+    console.log("cubic funtion running");
+    return Math.pow(count, 4);
+  }
+  let cube = useMemo(() => cubicNum(count), [count]);
   useEffect(() => {
     inputRef.current.focus();
     imperativeRef.current.changeText();
@@ -38,7 +50,6 @@ function App() {
           Count
         </button>
       </div>
-
       <div className="m-3">
         <form>
           <label htmlFor="inputN" className="form-label">
@@ -56,7 +67,6 @@ function App() {
           <input type="email" className="form-control" id="inputE" />
         </form>
       </div>
-
       {/*HACK: forwarding ref to child element and implementig useImperative handle hook */}
       <ImpertativeComp ref={imperativeRef} />
       <button
@@ -69,6 +79,17 @@ function App() {
       <div className="bg-warning">
         {helloText} {userName} islam
       </div>
+      {/* FIXME:created para by react will show here on button click */}
+      {state.para}
+      <button
+        className="btn btn-info my-3"
+        onClick={() => dispatch({ type: "CREATE_PARA" })}
+      >
+        Create p tag with react
+      </button>
+      <p className="text-black">
+        {count} to the power 4 is {cube}
+      </p>
     </div>
   );
 }
