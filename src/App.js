@@ -30,10 +30,12 @@ function App() {
   };
 
   const { count, square } = state;
+  // FIXME:this function will be memonized
   function cubicNum(count) {
     console.log("cubic funtion running");
     return Math.pow(count, 4);
   }
+  // HACK:useMemo hook used for memonize a function and invoke it if any dependency changes otherwise it will return memonize value for same input but will not invoke the function
   let cube = useMemo(() => cubicNum(count), [count]);
   useEffect(() => {
     inputRef.current.focus();
