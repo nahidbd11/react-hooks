@@ -4,6 +4,7 @@ import { Context } from "../context/Context";
 
 const ImpertativeComp = (props, ref) => {
   console.log(ref);
+  console.log("rendering child");
   const childRef = useRef(null);
   const { userName } = useContext(Context);
   const [text, setText] = useState("hellow");
@@ -27,6 +28,7 @@ const ImpertativeComp = (props, ref) => {
       <p className="text-danger">
         {text} {userName}
       </p>
+    
     </div>
   );
 };

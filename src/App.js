@@ -5,8 +5,11 @@ import {
   useRef,
   useState,
   useMemo,
+  useCallback,
 } from "react";
 import "./App.css";
+import CallbackCheckChild from "./component/CallbackCheckChild";
+import ChildComp from "./component/Childcomp";
 import ImpertativeComp from "./component/ImperativeComp";
 import { Context } from "./context/Context";
 import reducer from "./reducer";
@@ -42,7 +45,14 @@ function App() {
     imperativeRef.current.changeText();
     console.log(inputRef);
   }, []);
+  // FIXME:useCallback hook for memonized a funtion body
+  const passToChild = useCallback(() => {
+    console.log("from child", count);
+  }, [count]);
 
+  const childFunc = useCallback(() => {
+    console.log("hello from child",count);
+  }, [count]);
   return (
     <div className="container-fluid bg-light">
       <div className="bg-primary">
@@ -92,6 +102,8 @@ function App() {
       <p className="text-black">
         {count} to the power 4 is {cube}
       </p>
+      <CallbackCheckChild passToChild={passToChild} />
+      <ChildComp childFunc={childFunc} />
     </div>
   );
 }
