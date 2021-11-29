@@ -3,7 +3,6 @@ import {
   useEffect,
   useReducer,
   useRef,
-  useState,
   useMemo,
   useCallback,
 } from "react";
@@ -51,7 +50,7 @@ function App() {
   }, [count]);
 
   const childFunc = useCallback(() => {
-    console.log("hello from child",count);
+    console.log("hello from child", count);
   }, [count]);
   return (
     <div className="container-fluid bg-light">
